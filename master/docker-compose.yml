@@ -8,6 +8,20 @@ services:
             MYSQL_USER: koha
             MYSQL_PASSWORD: koha
 
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+        - db
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - "3002:80"
+        depends_on:
+            - db
+            
     memcached:
         image: memcached:alpine
 
